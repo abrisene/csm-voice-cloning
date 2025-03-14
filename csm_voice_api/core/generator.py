@@ -4,11 +4,11 @@ from typing import List, Tuple
 import torch
 import torchaudio
 from huggingface_hub import hf_hub_download
-from models import Model, ModelArgs
-from moshi.models import loaders
 from tokenizers.processors import TemplateProcessing
 from transformers import AutoTokenizer
-from watermarking import CSM_1B_GH_WATERMARK, load_watermarker, watermark
+
+from csm_voice_api.core.models.models import Model, ModelArgs
+from csm_voice_api.core.watermarking import CSM_1B_GH_WATERMARK, load_watermarker, watermark
 
 
 @dataclass
@@ -47,8 +47,8 @@ class Generator:
         self._text_tokenizer = load_llama3_tokenizer()
 
         device = next(model.parameters()).device
-        mimi_weight = hf_hub_download(loaders.DEFAULT_REPO, loaders.MIMI_NAME)
-        mimi = loaders.get_mimi(mimi_weight, device=device)
+        mimi_weight = hf_hub_download("moshi-voice/moshi", "mimi.pt")
+        mimi = torch.jit.load(mimi_weight, map_location=device)
         mimi.set_num_codebooks(32)
         self._audio_tokenizer = mimi
 

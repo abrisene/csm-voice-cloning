@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "csm-voice-api"
+version = "0.1.0"
+description = "OpenAI-compatible API for CSM voice cloning"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "csm_voice_api"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+torch = "2.4.0"
+torchaudio = "2.4.0"
+tokenizers = "0.21.0"
+transformers = "4.49.0"
+huggingface-hub = "0.28.1"
+moshi = "0.2.2"
+torchtune = "0.4.0"
+torchao = "0.9.0"
+silentcipher = {git = "https://github.com/SesameAILabs/silentcipher.git"}
+numpy = "^1.26.0"
+fastapi = "^0.110.0"
+uvicorn = "^0.27.0"
+pydantic = "^2.6.0"
+python-multipart = "^0.0.9"
+openai = "^1.12.0"
+websockets = "^12.0.0"
+pydub = "^0.25.1"
+pydantic-settings = "^2.1.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+isort = "^5.13.2"
+mypy = "^1.8.0"
+pytest = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "csm_voice_api.api.main:start"

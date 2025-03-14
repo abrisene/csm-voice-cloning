@@ -73,7 +73,3 @@ def load_audio(audio_path: str) -> tuple[torch.Tensor, int]:
     audio_array, sample_rate = torchaudio.load(audio_path)
     audio_array = audio_array.mean(dim=0)
     return audio_array, int(sample_rate)
-
-
-if __name__ == "__main__":
-    cli_check_audio()
